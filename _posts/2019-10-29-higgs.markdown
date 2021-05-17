@@ -1,0 +1,12 @@
+---
+layout: post
+title:  "Higgs Boson Detection"
+date:   2019-12-19
+image: /higgs.jpg
+course: "CS433: Machine Learning"
+categories: EPFL
+code: https://github.com/ridhachahed/Higgs-Boson-Machine-Learning-Project
+paper: /pdfs/higgs_report.pdf
+---
+We explore and compare different supervised learning algorithms and how they deal 
+with a data-set from CERN in the field of physics to predict the presence of the Higgs Boson.
