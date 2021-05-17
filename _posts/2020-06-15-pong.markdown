@@ -2,7 +2,7 @@
 layout: post
 title:  "Learning to play Pong with Deep Reinforcement Learning"
 date:   2020-06-15
-image: /images/pong.PNG
+image: /pong.PNG
 course: "CS456: Artificial neural networks"
 categories: EPFL
 code: https://github.com/ridhachahed/Reinforcement_Learning/blob/master/Pong_RL.ipynb
