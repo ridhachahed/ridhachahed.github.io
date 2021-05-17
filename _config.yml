@@ -1,4 +1,6 @@
-# Name of the site 
+# construct the server with bundle exec jekyll serve
+
+# Name of the site
 title: Ridha Chahed
 
 # Short bio or description (displayed in the header)
