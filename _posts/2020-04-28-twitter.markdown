@@ -1,0 +1,10 @@
+---
+layout: post
+title:  "Uncovering World Events using Twitter Hashtags"
+date:   2020-04-28
+image: /twitter.png
+course: "COM490: Lab in data science"
+categories: EPFL
+code: https://github.com/ridhachahed/Uncovering-World-Events-using-Twitter-Hashtags/blob/master/DSLab_homework-3.ipynb
+---
+Use temporal information about Twitter hashtags to discover trending topics and potentially uncover world events as they occurred.

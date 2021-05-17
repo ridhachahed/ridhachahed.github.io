@@ -1,0 +1,13 @@
+---
+layout: post
+title:  "Netflix Recommender System"
+date:   2019-12-19
+image: /netflix.jpg
+course: "CS433: Machine Learning"
+categories: EPFL
+code: https://github.com/ridhachahed/Netflix-Machine-Learning-Project
+paper: /pdfs/netflix_report.pdf
+---
+Use temporal information about Twitter hashtags to discover trending topics and potentially uncover world events as they occurred.
+
+[Paper PDF](/pdfs/netflix_report.pdf){:target="_blank"}
