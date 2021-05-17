@@ -2,7 +2,7 @@
 layout: post
 title:  "Netflix Recommender System"
 date:   2019-12-19
-image: /netflix.jpg
+image: /netflix.png
 course: "CS433: Machine Learning"
 categories: EPFL
 code: https://github.com/ridhachahed/Netflix-Machine-Learning-Project
