@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Higgs Boson Detection"
-date:   2019-12-19
+date:   2019-10-29
 image: /higgs.jpg
 course: "CS433: Machine Learning"
 categories: EPFL

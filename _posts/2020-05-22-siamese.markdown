@@ -1,0 +1,12 @@
+---
+layout: post
+title:  "Digit Comparison with Siamese Network"
+date:   2020-05-22
+image: /mnist.png
+course: "EE559: Deep Learning"
+categories: EPFL
+code: https://github.com/ridhachahed/DeepLearning/tree/master/project_1
+paper: /pdfs/mnist_report.pdf
+---
+Try out different architectures of neural nets using PyTorch in order to
+predict a comparison of two handwritten digits.

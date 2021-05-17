@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://localhost:4000/</loc>
-<lastmod>2019-12-19T00:00:00-05:00</lastmod>
+<lastmod>2019-10-29T00:00:00-04:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/</loc>
@@ -14,11 +14,15 @@
 </url>
 <url>
 <loc>http://localhost:4000/</loc>
-<lastmod>2020-06-15T00:00:00-04:00</lastmod>
+<lastmod>2020-05-22T00:00:00-04:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/</loc>
-<lastmod>2021-05-16T17:13:10-04:00</lastmod>
+<lastmod>2020-05-22T00:00:00-04:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/</loc>
+<lastmod>2020-06-15T00:00:00-04:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/about/</loc>
@@ -27,8 +31,16 @@
 <loc>http://localhost:4000/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/pdfs/framework_report.pdf</loc>
+<lastmod>2021-05-17T07:44:47-04:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/pdfs/higgs_report.pdf</loc>
 <lastmod>2021-05-17T07:35:14-04:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/pdfs/mnist_report.pdf</loc>
+<lastmod>2021-05-17T07:45:50-04:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/pdfs/netflix_report.pdf</loc>
