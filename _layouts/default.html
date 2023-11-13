@@ -28,6 +28,13 @@
                 Ridha Chahed
               </h1>
               <p>
+                I am a Machine Learning Engineer at Oracle Zurich in the MySQL Heatwave team. 
+                I am Developing <a href="https://www.oracle.com/mysql/heatwave/">MySQL HeatWave cloud service</a>, a fully managed database cloud service on OCI and AWS.
+                I mainly work on <a href="https://www.mysql.com/fr/products/mysqlheatwave/ml/">Heatwave AutoML</a> a cloud service for in-database machine learning. 
+                I design and develop new machine learning capabilities for Heatwave AutoML notably Recommendation Systems for database systems.
+                I am currently focusing on the deployment of Large Language Models and Genrative AI solutions in the Heatwave Cloud Service.
+              </p>
+              <p>
                 In the spring 2021 I interned at <a href="https://www.nec-labs.com/">NEC Labs Princeton</a> under the supervision of <a href="https://www.nec-labs.com/eric-cosatto">Eric Cosatto</a>. I worked on developing deep learning models for cell detection on histology images.
               </p>
               <p>
@@ -45,17 +52,61 @@
             </td>
           </tr>
         </table>
-
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
           <tr>
             <td style="padding:2.5%;width:100%;vertical-align:middle">
-              <h2>Research</h2>
+              <h2>Work</h2>
               <p>
                 I'm interested in Deep Learning, Computer Vision, Machine Learning and Natural Language Processing.
               </p>
             </td>
           </tr>
         </table>
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+
+          {% for post in site.posts %}
+          {% for cat in post.categories %}
+          {% if cat == 'work' %}
+          <tr>
+            <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
+              <img src="/tn{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+            </td>
+            <td style="padding:2.5%;width:75%;vertical-align:middle">
+              <h3>{{post.title}}</h3>
+              <br>
+              {{post.authors}}
+
+              <br>
+              <em>{{post.venue}}</em>, {{ post.date | date: "%Y" }}
+              <br>
+              {% if post.arxiv %}
+              <a href="{{post.arxiv}}">arxiv</a> /
+              {% endif %}
+              {% if post.video %}
+              <a href="{{post.video}}">video</a> /
+              {% endif %}
+              {% if post.code %}
+              <a href="{{post.code}}">code</a> /
+              {% endif %}
+              {% if post.poster %}
+              <a href="{{post.poster}}">poster</a> /
+              {% endif %}
+              {% if post.slides %}
+              <a href="{{post.slides}}">slides</a> /
+              {% endif %}
+              {% if post.website %}
+              <a href="{{post.website}}">website</a> /
+              {% endif %}
+              {% if post.youtube %}
+              <a href="{{post.youtube}}">youtube</a> /
+              {% endif %}
+              <p></p>
+              {{ post.excerpt }}
+            </td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
           <tr>
             <td style="padding:2.5%;width:100%;vertical-align:middle">
@@ -69,7 +120,7 @@
 
           {% for post in site.posts %}
           {% for cat in post.categories %}
-          {% if cat != 'research' and cat != 'Intel' %}
+          {% if cat != 'research' %}
           <tr>
             <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
               <img src="/images{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
