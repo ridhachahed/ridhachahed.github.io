@@ -30,9 +30,6 @@
               <p>
                 I am a Machine Learning Engineer at Oracle Zurich in the MySQL Heatwave team. 
                 I am Developing <a href="https://www.oracle.com/mysql/heatwave/">MySQL HeatWave cloud service</a>, a fully managed database cloud service on OCI and AWS.
-                I mainly work on <a href="https://www.mysql.com/fr/products/mysqlheatwave/ml/">Heatwave AutoML</a> a cloud service for in-database machine learning. 
-                I design and develop new machine learning capabilities for Heatwave AutoML notably Recommendation Systems for database systems.
-                I am currently focusing on the deployment of Large Language Models and Genrative AI solutions in the Heatwave Cloud Service.
               </p>
               <p>
                 In the spring 2021 I interned at <a href="https://www.nec-labs.com/">NEC Labs Princeton</a> under the supervision of <a href="https://www.nec-labs.com/eric-cosatto">Eric Cosatto</a>. I worked on developing deep learning models for cell detection on histology images.
@@ -57,6 +54,9 @@
             <td style="padding:2.5%;width:100%;vertical-align:middle">
               <h2>Work</h2>
               <p>
+                I mainly work on <a href="https://www.mysql.com/fr/products/mysqlheatwave/ml/">Heatwave AutoML</a> a cloud service for in-database machine learning. 
+                I design and develop new machine learning capabilities for Heatwave AutoML notably Recommendation Systems for database systems.
+                I am currently focusing on the deployment of Large Language Models and Genrative AI solutions in the Heatwave Cloud Service.
                 I'm interested in Deep Learning, Computer Vision, Machine Learning and Natural Language Processing.
               </p>
             </td>
@@ -69,7 +69,7 @@
           {% if cat == 'work' %}
           <tr>
             <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
-              <img src="/tn{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+              <img src="/images{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
             </td>
             <td style="padding:2.5%;width:75%;vertical-align:middle">
               <h3>{{post.title}}</h3>
@@ -120,7 +120,7 @@
 
           {% for post in site.posts %}
           {% for cat in post.categories %}
-          {% if cat != 'research' %}
+          {% if cat != 'work' %}
           <tr>
             <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
               <img src="/images{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
