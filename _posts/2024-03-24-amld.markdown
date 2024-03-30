@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Workshop MySQL Heatwave ML"
+title:  "Workshop MySQL Heatwave AutoML"
 venue: AMLD 2024
 date: 2024-03-24
 image: /logo_workshop.png
