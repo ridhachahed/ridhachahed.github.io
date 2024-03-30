@@ -1,0 +1,10 @@
+---
+layout: post
+title:  "Workshop Heatwave ML at the AMLD 2024"
+date: 2024-03-24
+image: /logo_workshop.png
+categories: work
+website: https://ridhachahed.github.io/heatwave-workshop-website/
+---
+Automated Machine Learning from Your Database System with MySQL HeatWave Service.
+A workshop I organized at the Applied Machine Learning Days 2024.
