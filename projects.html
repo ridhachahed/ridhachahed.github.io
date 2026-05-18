@@ -1,0 +1,46 @@
+---
+layout: page
+title: Projects
+permalink: /projects/
+---
+
+<div class="section-head">
+  <h2>Projects</h2>
+  <span class="line"></span>
+</div>
+<p class="lede">Coursework, side projects, and unpublished research.</p>
+
+{% for post in site.posts %}
+{% assign is_work = false %}
+{% for cat in post.categories %}{% if cat == 'work' %}{% assign is_work = true %}{% endif %}{% endfor %}
+{% unless is_work %}
+<article class="entry">
+  {% if post.image %}
+  <img class="entry-thumb" src="/images{{ post.image }}" alt="{{ post.title }}">
+  {% endif %}
+  <div class="entry-body">
+    {% if post.website %}
+    <a class="entry-title" href="{{ post.website }}">{{ post.title }}</a>
+    {% else %}
+    <div class="entry-title">{{ post.title }}</div>
+    {% endif %}
+    <div class="entry-meta">
+      <em>{{ post.categories | join: " " }}</em>{% if post.course %} · {{ post.course }}{% endif %} · {{ post.date | date: "%Y" }}
+    </div>
+    <div class="entry-desc">{{ post.excerpt | strip_html | strip }}</div>
+    <div class="entry-links">
+      {% if post.website %}<a href="{{ post.website }}">website</a>{% endif %}
+      {% if post.paper %}<a href="{{ post.paper }}">paper</a>{% endif %}
+      {% if post.patent %}<a href="{{ post.patent }}">patent</a>{% endif %}
+      {% if post.patent2 %}<a href="{{ post.patent2 }}">patent #2</a>{% endif %}
+      {% if post.patent3 %}<a href="{{ post.patent3 }}">patent #3</a>{% endif %}
+      {% if post.video %}<a href="{{ post.video }}">video</a>{% endif %}
+      {% if post.video2 %}<a href="{{ post.video2 }}">video #2</a>{% endif %}
+      {% if post.code %}<a href="{{ post.code }}">code</a>{% endif %}
+      {% if post.poster %}<a href="{{ post.poster }}">poster</a>{% endif %}
+      {% if post.slides %}<a href="{{ post.slides }}">slides</a>{% endif %}
+    </div>
+  </div>
+</article>
+{% endunless %}
+{% endfor %}

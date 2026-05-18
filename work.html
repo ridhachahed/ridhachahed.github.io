@@ -1,0 +1,51 @@
+---
+layout: page
+title: Work
+permalink: /work/
+---
+
+<div class="section-head">
+  <h2>Work</h2>
+  <span class="line"></span>
+</div>
+<p class="lede">
+  Currently I lead Large Language Model and Generative AI deployment in the
+  <a href="https://www.oracle.com/mysql/heatwave/">MySQL HeatWave</a> cloud service:
+  in-database <strong>LLM inference</strong>, <strong>RAG</strong>, vector search, and
+  <a href="https://www.mysql.com/products/enterprise/heatwave-ml.html">HeatWave AutoML</a>
+  recommendation systems — all running natively where the data lives. Selected talks
+  and write-ups below; full timeline in the <a href="/cv/">CV</a>.
+</p>
+
+{% for post in site.posts %}
+{% for cat in post.categories %}
+{% if cat == 'work' %}
+<article class="entry">
+  {% if post.image %}
+  <img class="entry-thumb" src="/images{{ post.image }}" alt="{{ post.title }}">
+  {% endif %}
+  <div class="entry-body">
+    {% if post.website %}
+    <a class="entry-title" href="{{ post.website }}">{{ post.title }}</a>
+    {% else %}
+    <div class="entry-title">{{ post.title }}</div>
+    {% endif %}
+    <div class="entry-meta">
+      {% if post.authors %}{{ post.authors }} · {% endif %}
+      <em>{{ post.venue }}</em> · {{ post.date | date: "%Y" }}
+    </div>
+    <div class="entry-desc">{{ post.excerpt | strip_html | strip }}</div>
+    <div class="entry-links">
+      {% if post.arxiv %}<a href="{{ post.arxiv }}">arxiv</a>{% endif %}
+      {% if post.video %}<a href="{{ post.video }}">video</a>{% endif %}
+      {% if post.code %}<a href="{{ post.code }}">code</a>{% endif %}
+      {% if post.poster %}<a href="{{ post.poster }}">poster</a>{% endif %}
+      {% if post.slides %}<a href="{{ post.slides }}">slides</a>{% endif %}
+      {% if post.website %}<a href="{{ post.website }}">website</a>{% endif %}
+      {% if post.youtube %}<a href="{{ post.youtube }}">youtube</a>{% endif %}
+    </div>
+  </div>
+</article>
+{% endif %}
+{% endfor %}
+{% endfor %}

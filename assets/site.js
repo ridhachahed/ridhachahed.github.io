@@ -160,7 +160,8 @@
     github: "https://github.com/ridhachahed",
     twitter: "https://twitter.com/ChahedRidha",
     linkedin: "https://www.linkedin.com/in/ridha-chahed/",
-    email: "mailto:ridha.chahed@gmail.com"
+    email: "mailto:ridha.chahed@gmail.com",
+    cv: "/pdfs/CV_Ridha_Chahed.pdf"
   };
 
   var history = [];
@@ -191,13 +192,57 @@
     body.insertBefore(d, body.lastElementChild);
   }
 
-  function goTo(id, label) {
-    var el = document.getElementById(id);
-    if (!el) { print("section not found: " + id); return; }
-    print("→ navigating to <span class=\"hl\">" + label + "</span> …");
-    setTimeout(function () {
-      el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-    }, 180);
+  /* ---- Session persistence (survives page navigation) ---- */
+  var STORE = "ridha-term-v1";
+
+  function saveState() {
+    try {
+      var nodes = body.querySelectorAll(".term-line, .term-out");
+      var html = "";
+      for (var i = 0; i < nodes.length; i++) html += nodes[i].outerHTML;
+      sessionStorage.setItem(STORE, JSON.stringify({ html: html, hist: history }));
+    } catch (e) { /* storage unavailable — ignore */ }
+  }
+
+  function restoreState() {
+    try {
+      var raw = sessionStorage.getItem(STORE);
+      if (!raw) return false;
+      var s = JSON.parse(raw);
+      if (!s) return false;
+      var tmp = document.createElement("div");
+      tmp.innerHTML = s.html || "";
+      while (tmp.firstChild) body.insertBefore(tmp.firstChild, body.lastElementChild);
+      if (s.hist && s.hist.length) { history = s.hist; hIdx = history.length; }
+      scroll();
+      return true;
+    } catch (e) { return false; }
+  }
+
+  var ROUTES = {
+    home: "/",
+    about: "/#about",
+    work: "/work/",
+    cv: "/cv/",
+    projects: "/projects/"
+  };
+
+  function nav(name) {
+    var dest = ROUTES[name];
+    if (!dest) { print("no such page: <span class='hl'>" + esc(name) + "</span>"); return; }
+    var path = dest.split("#")[0] || "/";
+    var hash = dest.indexOf("#") > -1 ? dest.split("#")[1] : "";
+    var here = location.pathname.replace(/index\.html$/, "") || "/";
+    if (here === path) {
+      var el = hash ? document.getElementById(hash) : document.body;
+      print("→ <span class='hl'>" + name + "</span>");
+      if (el) setTimeout(function () {
+        el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      }, 160);
+      return;
+    }
+    print("→ navigating to <span class='hl'>" + name + "</span> …");
+    setTimeout(function () { location.href = dest; }, 340);
   }
 
   var COMMANDS = {
@@ -205,13 +250,14 @@
       print(
         "available commands\n" +
         "  <span class='k'>help</span>        this message\n" +
-        "  <span class='k'>ls</span>          list site sections\n" +
+        "  <span class='k'>ls</span>          list pages\n" +
         "  <span class='k'>whoami</span>      who is this\n" +
-        "  <span class='k'>about</span>       jump to bio\n" +
-        "  <span class='k'>work</span>        jump to work\n" +
-        "  <span class='k'>projects</span>    jump to projects\n" +
-        "  <span class='k'>cv</span>          résumé / cv\n" +
-        "  <span class='k'>open</span> &lt;x&gt;     open github | twitter | linkedin | email\n" +
+        "  <span class='k'>cd</span> &lt;page&gt;    go to a page (work, cv, projects, home)\n" +
+        "  <span class='k'>work</span>        go to work\n" +
+        "  <span class='k'>cv</span>          go to the cv / résumé\n" +
+        "  <span class='k'>projects</span>    go to projects\n" +
+        "  <span class='k'>about</span>       about me\n" +
+        "  <span class='k'>open</span> &lt;x&gt;     open cv | github | linkedin | twitter | email\n" +
         "  <span class='k'>contact</span>     how to reach me\n" +
         "  <span class='k'>banner</span>      print the banner\n" +
         "  <span class='k'>clear</span>       clear the screen\n" +
@@ -219,17 +265,29 @@
       );
     },
     ls: function () {
-      print("about/   work/   projects/   cv/   contact/");
+      print("home/   work/   cv/   projects/   — plus <span class='k'>open github</span>, <span class='k'>contact</span>");
+    },
+    cd: function (a) {
+      var t = (a[0] || "home").toLowerCase().replace(/[\/~.]/g, "");
+      if (t === "") t = "home";
+      if (!ROUTES[t]) {
+        print("cd: no such page: <span class='hl'>" + esc(a[0] || "") +
+          "</span> — try home, work, cv, projects");
+        return;
+      }
+      nav(t);
     },
     whoami: function () {
-      print("Ridha Chahed — Machine Learning engineer (Generative AI &amp; LLMs) at Oracle Zurich, MySQL HeatWave team.");
+      print("Ridha Chahed — Senior Member of Technical Staff at Oracle Zurich, leading LLM &amp; Generative AI in MySQL HeatWave.");
     },
-    about: function () { goTo("about", "about"); },
-    bio: function () { goTo("about", "about"); },
-    work: function () { goTo("work", "work"); },
-    projects: function () { goTo("projects", "projects"); },
+    home: function () { nav("home"); },
+    about: function () { nav("about"); },
+    bio: function () { nav("about"); },
+    work: function () { nav("work"); },
+    projects: function () { nav("projects"); },
     cv: function () {
-      print("CV is being polished — meanwhile try <span class='k'>about</span>, or <span class='k'>open linkedin</span>.");
+      print("résumé · <a href='" + LINKS.cv + "'>download pdf ↗</a>");
+      nav("cv");
     },
     resume: function () { COMMANDS.cv(); },
     contact: function () {
@@ -246,16 +304,17 @@
         print("opening <span class='hl'>" + t + "</span> …");
         window.open(LINKS[t], t === "email" ? "_self" : "_blank");
       } else {
-        print("open: unknown target '" + esc(t) + "'. try: github, twitter, linkedin, email");
+        print("open: unknown target '" + esc(t) + "'. try: cv, github, linkedin, twitter, email");
       }
     },
     clear: function () {
       var lines = body.querySelectorAll(".term-line, .term-out");
       for (var i = 0; i < lines.length; i++) lines[i].remove();
+      saveState();
     },
     banner: function () { printBanner(); },
     echo: function (a) { print(esc(a.join(" "))); },
-    pwd: function () { print("/home/ridha/web"); },
+    pwd: function () { print("~" + (location.pathname.replace(/\/$/, "") || "")); },
     date: function () { print(new Date().toString()); },
     history: function () {
       print(history.map(function (h, i) { return "  " + (i + 1) + "  " + esc(h); }).join("\n") || "(empty)");
@@ -294,6 +353,7 @@
       print("command not found: <span class='hl'>" + esc(cmd) +
         "</span> — type <span class='k'>help</span>");
     }
+    saveState();
   }
 
   input.addEventListener("keydown", function (e) {
@@ -329,9 +389,15 @@
     if (!window.getSelection || String(window.getSelection()) === "") input.focus();
   });
 
-  /* ---- Boot sequence: auto-type a welcome ---- */
+  /* ---- Boot: restore a prior session, or auto-type a welcome ---- */
   var boot = ["help"];
+
+  if (restoreState()) {
+    input.focus();
+    return;
+  }
   printBanner();
+  saveState();
 
   function autoType(cmd, done) {
     var i = 0;
