@@ -1,192 +1,192 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <title>{{ site.title }}</title>
-
-  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-
-  <meta name="author" content="{{ site.title }}" />
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ site.title }}</title>
+  <meta name="author" content="{{ site.title }}">
+  <meta name="description" content="Ridha Chahed — Machine Learning engineer building Generative AI and LLM systems.">
 
-  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
+  <meta property="og:title" content="{{ site.title }}">
+  <meta property="og:description" content="Machine Learning engineer building Generative AI and LLM systems.">
+  <meta property="og:type" content="website">
+
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
-
-
 <body>
-  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-    <tr style="padding:0px">
-      <td style="padding:0px">
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-          <tr style="padding:0px">
-            <td style="padding:2.5%;width:60%;vertical-align:middle">
-              <h1>
-                Ridha Chahed
-              </h1>
-              <p>
-                I am a Machine Learning engineer at Oracle Zurich in the MySQL Heatwave team. 
-                I am developing <a href="https://www.oracle.com/mysql/heatwave/">MySQL HeatWave cloud service</a>, a fully managed database cloud service on OCI and AWS.
-              </p>
-              <p>
-                In the spring 2021 I interned at <a href="https://www.nec-labs.com/">NEC Labs Princeton</a> under the supervision of <a href="https://www.nec-labs.com/eric-cosatto">Eric Cosatto</a>. I worked on developing deep learning models for cell detection on histology images.
-              </p>
-              <p>
-                I have a MS in Data Science (AI focus) from  <a href="https://www.epfl.ch/en/">EPFL</a>, where I was a research assistant for Dr <a href="https://people.epfl.ch/mary-anne.hartley/?lang=en">Mary Anne Hartley</a> and a teaching assistant for professor <a href="https://people.epfl.ch/martin.jaggi">Martin Jaggi</a> (<a href="https://www.epfl.ch/labs/mlo/machine-learning-cs-433/">CS433</a>). I have a BS in Communication Systems from <a href="https://www.epfl.ch/en/">EPFL</a>.
-              </p>
-              <p style="text-align:center">
-                <a href="mailto:ridha.chahed@gmail.com">Email</a> &nbsp/&nbsp
-                <a href="https://twitter.com/ChahedRidha">Twitter</a> &nbsp/&nbsp
-                <a href="https://github.com/ridhachahed">Github</a> &nbsp/&nbsp
-                <a href="https://www.linkedin.com/in/ridha-chahed/">LinkedIn</a>
-              </p>
-            </td>
-            <td style="padding:2.5%;width:40%;max-width:40%">
-              <img style="width:100%;max-width:100%" alt="profile photo" src="images/id_carthago_circle.png">
-            </td>
-          </tr>
-        </table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-          <tr>
-            <td style="padding:2.5%;width:100%;vertical-align:middle">
-              <h2>Work</h2>
-              <p>
-                I mainly work on <a href="https://www.mysql.com/fr/products/mysqlheatwave/ml/">Heatwave AutoML</a> a cloud service for in-database machine learning. <br>
-                I design and develop new machine learning capabilities for Heatwave AutoML notably Generative AI, Retrieval Augmented Generation (RAG) and
-                Recommendation Systems for database systems. <br>
-                I am currently focusing on the deployment of Large Language Models and Generative AI solutions in the Heatwave Cloud Service. <br>
-                I'm interested in Deep Learning, Computer Vision, Machine Learning and Natural Language Processing. 
-              </p>
-            </td>
-          </tr>
-        </table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+  <canvas id="bg-art" aria-hidden="true"></canvas>
+  <div class="bg-grad" aria-hidden="true"></div>
 
-          {% for post in site.posts %}
-          {% for cat in post.categories %}
-          {% if cat == 'work' %}
-          <tr>
-            <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
-              <img src="/images{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
-            </td>
-            <td style="padding:2.5%;width:75%;vertical-align:middle">
-              <h3>{{post.title}}</h3>
-              <br>
-              {{post.authors}}
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-name" href="/">~/ridha-chahed</a>
+      <div class="nav-links">
+        <a href="#work">work</a>
+        <a href="#projects">projects</a>
+        <a href="https://github.com/ridhachahed">github</a>
+      </div>
+    </div>
+  </nav>
 
-              <br>
-              <em>{{post.venue}}</em>, {{ post.date | date: "%Y" }}
-              <br>
-              {% if post.arxiv %}
-              <a href="{{post.arxiv}}">arxiv</a> /
-              {% endif %}
-              {% if post.video %}
-              <a href="{{post.video}}">video</a> /
-              {% endif %}
-              {% if post.code %}
-              <a href="{{post.code}}">code</a> /
-              {% endif %}
-              {% if post.poster %}
-              <a href="{{post.poster}}">poster</a> /
-              {% endif %}
-              {% if post.slides %}
-              <a href="{{post.slides}}">slides</a> /
-              {% endif %}
-              {% if post.website %}
-              <a href="{{post.website}}">website</a> /
-              {% endif %}
-              {% if post.youtube %}
-              <a href="{{post.youtube}}">youtube</a> /
-              {% endif %}
-              <p></p>
-              {{ post.excerpt }}
-            </td>
-          </tr>
+  <main class="wrap">
+
+    <section class="term-shell reveal" aria-label="Interactive terminal">
+      <div class="term-bar">
+        <span class="term-dot r"></span>
+        <span class="term-dot y"></span>
+        <span class="term-dot g"></span>
+        <span class="term-title">ridha@web — bash</span>
+      </div>
+      <div class="term-body" id="term-body">
+        <div class="term-input-row">
+          <span class="pmt">ridha@web</span>:<span class="pth">~</span>$
+          <input id="term-input" type="text" autocomplete="off"
+                 autocapitalize="off" autocorrect="off" spellcheck="false"
+                 aria-label="Terminal input">
+        </div>
+      </div>
+    </section>
+    <p class="term-hint">interactive — try <b>help</b>, <b>ls</b>, <b>work</b>, <b>open github</b></p>
+
+    <header class="hero reveal">
+      <div class="hero-text">
+        <h1>Ridha Chahed</h1>
+        <div class="role">Machine Learning Engineer · Generative AI &amp; LLMs</div>
+      </div>
+      <img class="hero-photo" src="/images/id_carthago_circle.png" alt="Ridha Chahed">
+    </header>
+
+    <section class="bio reveal" id="about">
+      <p>
+        I am a Machine Learning engineer at Oracle Zurich in the MySQL HeatWave team,
+        where I develop the <a href="https://www.oracle.com/mysql/heatwave/">MySQL HeatWave cloud service</a> —
+        a fully managed database cloud service on OCI and AWS.
+      </p>
+      <p>
+        In spring 2021 I interned at <a href="https://www.nec-labs.com/">NEC Labs Princeton</a>
+        under <a href="https://www.nec-labs.com/eric-cosatto">Eric Cosatto</a>,
+        building deep learning models for cell detection on histology images.
+      </p>
+      <p>
+        I hold an MS in Data Science (AI focus) from <a href="https://www.epfl.ch/en/">EPFL</a>,
+        where I was a research assistant for Dr <a href="https://people.epfl.ch/mary-anne.hartley/?lang=en">Mary Anne Hartley</a>
+        and a teaching assistant for Prof. <a href="https://people.epfl.ch/martin.jaggi">Martin Jaggi</a>
+        (<a href="https://www.epfl.ch/labs/mlo/machine-learning-cs-433/">CS-433</a>).
+        I also hold a BS in Communication Systems from EPFL.
+      </p>
+
+      <div class="socials">
+        <a href="mailto:ridha.chahed@gmail.com">Email</a>
+        <a href="https://twitter.com/ChahedRidha">Twitter</a>
+        <a href="https://github.com/ridhachahed">GitHub</a>
+        <a href="https://www.linkedin.com/in/ridha-chahed/">LinkedIn</a>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="section-head">
+        <h2>Work</h2>
+        <span class="line"></span>
+      </div>
+      <p class="lede">
+        I design and build new machine learning capabilities for
+        <a href="https://www.mysql.com/fr/products/mysqlheatwave/ml/">HeatWave AutoML</a> —
+        Generative AI, Retrieval-Augmented Generation, and recommendation systems running
+        natively inside the database. I currently focus on deploying Large Language Models
+        and Generative AI in the HeatWave cloud service.
+      </p>
+
+      {% for post in site.posts %}
+      {% for cat in post.categories %}
+      {% if cat == 'work' %}
+      <article class="entry">
+        {% if post.image %}
+        <img class="entry-thumb" src="/images{{ post.image }}" alt="{{ post.title }}">
+        {% endif %}
+        <div class="entry-body">
+          {% if post.website %}
+          <a class="entry-title" href="{{ post.website }}">{{ post.title }}</a>
+          {% else %}
+          <div class="entry-title">{{ post.title }}</div>
           {% endif %}
-          {% endfor %}
-          {% endfor %}
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-          <tr>
-            <td style="padding:2.5%;width:100%;vertical-align:middle">
-              <h2>Projects</h2>
-              <p> These include coursework, side projects and unpublished research work. 
-              </p>
-            </td>
-          </tr>
-        </table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <div class="entry-meta">
+            {% if post.authors %}{{ post.authors }} · {% endif %}
+            <em>{{ post.venue }}</em> · {{ post.date | date: "%Y" }}
+          </div>
+          <div class="entry-desc">{{ post.excerpt | strip_html | strip }}</div>
+          <div class="entry-links">
+            {% if post.arxiv %}<a href="{{ post.arxiv }}">arxiv</a>{% endif %}
+            {% if post.video %}<a href="{{ post.video }}">video</a>{% endif %}
+            {% if post.code %}<a href="{{ post.code }}">code</a>{% endif %}
+            {% if post.poster %}<a href="{{ post.poster }}">poster</a>{% endif %}
+            {% if post.slides %}<a href="{{ post.slides }}">slides</a>{% endif %}
+            {% if post.website %}<a href="{{ post.website }}">website</a>{% endif %}
+            {% if post.youtube %}<a href="{{ post.youtube }}">youtube</a>{% endif %}
+          </div>
+        </div>
+      </article>
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+    </section>
 
-          {% for post in site.posts %}
-          {% for cat in post.categories %}
-          {% if cat != 'work' %}
-          <tr>
-            <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
-              <img src="/images{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
-            </td>
-            <td style="padding:2.5%;width:75%;vertical-align:middle">
-              <h3>{{post.title}}</h3>
-              <br>
-              <em>{{post.categories}} {{post.course}}</em>
-              <br>
-              {{ post.date | date: "%Y-%m-%d" }}
+    <section class="section" id="projects">
+      <div class="section-head">
+        <h2>Projects</h2>
+        <span class="line"></span>
+      </div>
+      <p class="lede">Coursework, side projects, and unpublished research.</p>
 
-              <br>
-              {% if post.website %}
-              <a href="{{post.website}}">website</a> /
-              {% endif %}
-              {% if post.paper %}
-              <a href="{{post.paper}}">paper</a> /
-              {% endif %}
-              {% if post.patent %}
-              <a href="{{post.patent}}">patent</a> /
-              {% endif %}
-              {% if post.patent2 %}
-              <a href="{{post.patent2}}">patent #2</a> /
-              {% endif %}
-              {% if post.patent3 %}
-              <a href="{{post.patent3}}">patent #3</a> /
-              {% endif %}
-              {% if post.video %}
-              <a href="{{post.video}}">video</a> /
-              {% endif %}
-              {% if post.video2 %}
-              <a href="{{post.video2}}">video #2</a> /
-              {% endif %}
-              {% if post.code %}
-              <a href="{{post.code}}">code</a> /
-              {% endif %}
-              {% if post.poster %}
-              <a href="{{post.poster}}">poster</a> /
-              {% endif %}
-              {% if post.slides %}
-              <a href="{{post.slides}}">slides</a> /
-              {% endif %}
-              <p></p>
-              {{ post.excerpt }}
-            </td>
-          </tr>
+      {% for post in site.posts %}
+      {% assign is_work = false %}
+      {% for cat in post.categories %}{% if cat == 'work' %}{% assign is_work = true %}{% endif %}{% endfor %}
+      {% unless is_work %}
+      <article class="entry">
+        {% if post.image %}
+        <img class="entry-thumb" src="/images{{ post.image }}" alt="{{ post.title }}">
+        {% endif %}
+        <div class="entry-body">
+          {% if post.website %}
+          <a class="entry-title" href="{{ post.website }}">{{ post.title }}</a>
+          {% else %}
+          <div class="entry-title">{{ post.title }}</div>
           {% endif %}
-          {% endfor %}
-          {% endfor %}
-        </table>
+          <div class="entry-meta">
+            <em>{{ post.categories | join: " " }}</em>{% if post.course %} · {{ post.course }}{% endif %} · {{ post.date | date: "%Y" }}
+          </div>
+          <div class="entry-desc">{{ post.excerpt | strip_html | strip }}</div>
+          <div class="entry-links">
+            {% if post.website %}<a href="{{ post.website }}">website</a>{% endif %}
+            {% if post.paper %}<a href="{{ post.paper }}">paper</a>{% endif %}
+            {% if post.patent %}<a href="{{ post.patent }}">patent</a>{% endif %}
+            {% if post.patent2 %}<a href="{{ post.patent2 }}">patent #2</a>{% endif %}
+            {% if post.patent3 %}<a href="{{ post.patent3 }}">patent #3</a>{% endif %}
+            {% if post.video %}<a href="{{ post.video }}">video</a>{% endif %}
+            {% if post.video2 %}<a href="{{ post.video2 }}">video #2</a>{% endif %}
+            {% if post.code %}<a href="{{ post.code }}">code</a>{% endif %}
+            {% if post.poster %}<a href="{{ post.poster }}">poster</a>{% endif %}
+            {% if post.slides %}<a href="{{ post.slides }}">slides</a>{% endif %}
+          </div>
+        </div>
+      </article>
+      {% endunless %}
+      {% endfor %}
+    </section>
 
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-          <tr>
-            <td style="padding:0px">
-              <br>
-              <p style="text-align:center;font-size:small;">
-                Design and source code from <a style="font-size:small;" href="https://jonbarron.info">Jon Barron's website</a>
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+    <footer class="foot">
+      <span>© {{ site.time | date: "%Y" }} Ridha Chahed</span>
+      <span>Built with Jekyll · Zurich</span>
+    </footer>
+
+  </main>
+
+  <script src="{{ site.baseurl }}/assets/site.js"></script>
 </body>
-
 </html>
-
