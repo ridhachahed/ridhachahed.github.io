@@ -12,9 +12,13 @@ layout: base
   <div class="term-body" id="term-body">
     <div class="term-input-row">
       <span class="pmt">ridha@web</span>:<span class="pth">~</span>$
-      <input id="term-input" type="text" autocomplete="off"
-             autocapitalize="off" autocorrect="off" spellcheck="false"
-             aria-label="Terminal input">
+      <span class="term-input-wrap">
+        <input id="term-input" type="text" autocomplete="off"
+               autocapitalize="off" autocorrect="off" spellcheck="false"
+               aria-label="Terminal input">
+        <span class="term-measure" id="term-measure" aria-hidden="true"></span>
+        <span class="term-cursor" id="term-cursor" aria-hidden="true"></span>
+      </span>
     </div>
   </div>
 </section>
@@ -25,7 +29,7 @@ layout: base
     <h1>Ridha Chahed</h1>
     <div class="role">Senior Member of Technical Staff @ Oracle<br>Generative AI &amp; LLMs</div>
   </div>
-  <img class="hero-photo" src="/images/id_carthago_circle.png" alt="Ridha Chahed">
+  <img class="hero-photo" src="/images/id_carthago_circle.png" alt="Ridha Chahed" width="210" height="210" decoding="async">
 </header>
 
 <section class="bio reveal" id="about">

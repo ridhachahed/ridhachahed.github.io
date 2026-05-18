@@ -28,7 +28,7 @@ permalink: /work/
 {% if cat == 'work' %}
 <article class="entry">
   {% if post.image %}
-  <img class="entry-thumb" src="/images{{ post.image }}" alt="{{ post.title }}">
+  <img class="entry-thumb" src="/images{{ post.image }}" alt="{{ post.title }}" loading="lazy" decoding="async">
   {% endif %}
   <div class="entry-body">
     {% if post.website %}

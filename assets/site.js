@@ -1,5 +1,5 @@
 /* ===================================================================
-   Ridha Chahed — interactive terminal + animated background art
+   Ridha Chahed — interactive terminal
    Vanilla JS, no dependencies.
    =================================================================== */
 (function () {
@@ -9,152 +9,48 @@
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* -----------------------------------------------------------------
-     1. Animated background — drifting constellation of warm particles
-     ----------------------------------------------------------------- */
-  (function bgArt() {
-    var canvas = document.getElementById("bg-art");
-    if (!canvas || reduce) return;
-    var ctx = canvas.getContext("2d");
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var W, H, pts, fieldH;
-
-    // Depth layers: far (small/slow/faint) → near (large/fast/bold).
-    function resize() {
-      W = canvas.width = innerWidth * dpr;
-      H = canvas.height = innerHeight * dpr;
-      canvas.style.width = innerWidth + "px";
-      canvas.style.height = innerHeight + "px";
-      // Field is taller than the viewport so scroll parallax has room.
-      fieldH = H + 600 * dpr;
-      var n = Math.round(Math.min(120, (innerWidth * innerHeight) / 13000));
-      pts = [];
-      for (var i = 0; i < n; i++) {
-        var z = Math.random();                       // 0 = far, 1 = near
-        pts.push({
-          x: Math.random() * W,
-          y: Math.random() * fieldH,
-          vx: (Math.random() - 0.5) * (0.07 + z * 0.20) * dpr,
-          vy: (Math.random() - 0.5) * (0.07 + z * 0.20) * dpr,
-          z: z,
-          r: (0.6 + z * 2.0) * dpr,
-          ox: 0, oy: 0,                               // eased mouse offset
-          warm: Math.random() > 0.6
-        });
-      }
-    }
-
-    var mx = -9999, my = -9999, tmx = -9999, tmy = -9999;
-    var scrollY = 0, sTarget = 0;
-    addEventListener("mousemove", function (e) {
-      tmx = e.clientX * dpr; tmy = e.clientY * dpr;
-    });
-    addEventListener("mouseout", function () { tmx = tmy = -9999; });
-    addEventListener("scroll", function () {
-      sTarget = (window.pageYOffset || 0) * dpr;
-    }, { passive: true });
-
-    var LINK = 0;
-    function tick() {
-      // Smooth followers for buttery interaction.
-      mx += (tmx - mx) * 0.12;
-      my += (tmy - my) * 0.12;
-      scrollY += (sTarget - scrollY) * 0.08;
-
-      ctx.clearRect(0, 0, W, H);
-      LINK = 150 * dpr;
-      var rep = 130 * dpr;
-
-      for (var i = 0; i < pts.length; i++) {
-        var p = pts[i];
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < -20) p.x = W + 20; else if (p.x > W + 20) p.x = -20;
-        if (p.y < -20) p.y = fieldH + 20; else if (p.y > fieldH + 20) p.y = -20;
-
-        // Parallax: nearer layers shift more as you scroll.
-        p.sx = p.x;
-        p.sy = p.y - scrollY * (0.15 + p.z * 0.55);
-        // Wrap the parallaxed Y back into the visible band.
-        p.sy = ((p.sy % fieldH) + fieldH) % fieldH;
-
-        // Smooth, eased repulsion around the cursor.
-        var dxm = p.sx - mx, dym = p.sy - my;
-        var dm = Math.sqrt(dxm * dxm + dym * dym);
-        var tx = 0, ty = 0;
-        if (dm < rep && dm > 0.01) {
-          var f = (1 - dm / rep);
-          f = f * f * (28 + p.z * 34) * dpr;
-          tx = (dxm / dm) * f;
-          ty = (dym / dm) * f;
-        }
-        p.ox += (tx - p.ox) * 0.10;
-        p.oy += (ty - p.oy) * 0.10;
-        p.dx = p.sx + p.ox;
-        p.dy = p.sy + p.oy;
-      }
-
-      // Links between nearby points (depth-weighted opacity).
-      for (var a = 0; a < pts.length; a++) {
-        var pa = pts[a];
-        for (var b = a + 1; b < pts.length; b++) {
-          var pb = pts[b];
-          var lx = pa.dx - pb.dx, ly = pa.dy - pb.dy;
-          var d2 = lx * lx + ly * ly;
-          if (d2 < LINK * LINK) {
-            var d = Math.sqrt(d2);
-            var op = 0.07 * (1 - d / LINK) * (0.4 + (pa.z + pb.z) * 0.5);
-            ctx.strokeStyle = "rgba(33,29,22," + op + ")";
-            ctx.lineWidth = (0.5 + ((pa.z + pb.z) * 0.5)) * dpr;
-            ctx.beginPath();
-            ctx.moveTo(pa.dx, pa.dy);
-            ctx.lineTo(pb.dx, pb.dy);
-            ctx.stroke();
-          }
-        }
-      }
-
-      // Faint links from the cursor to nearby points.
-      if (mx > -1000) {
-        for (var c = 0; c < pts.length; c++) {
-          var pc = pts[c];
-          var cx = pc.dx - mx, cy = pc.dy - my;
-          var cd = Math.sqrt(cx * cx + cy * cy);
-          if (cd < rep) {
-            ctx.strokeStyle = "rgba(15,122,82," + (0.10 * (1 - cd / rep)) + ")";
-            ctx.lineWidth = dpr;
-            ctx.beginPath();
-            ctx.moveTo(mx, my);
-            ctx.lineTo(pc.dx, pc.dy);
-            ctx.stroke();
-          }
-        }
-      }
-
-      // Dots last, so they sit on top of the web.
-      for (var k = 0; k < pts.length; k++) {
-        var p2 = pts[k];
-        var alpha = 0.14 + p2.z * 0.30;
-        ctx.beginPath();
-        ctx.arc(p2.dx, p2.dy, p2.r, 0, 6.2832);
-        ctx.fillStyle = p2.warm
-          ? "rgba(194,97,31," + alpha + ")"
-          : "rgba(15,122,82," + alpha + ")";
-        ctx.fill();
-      }
-
-      requestAnimationFrame(tick);
-    }
-
-    resize();
-    addEventListener("resize", resize);
-    tick();
-  })();
-
-  /* -----------------------------------------------------------------
-     2. Interactive terminal
+     Interactive terminal
      ----------------------------------------------------------------- */
   var body = document.getElementById("term-body");
   var input = document.getElementById("term-input");
   if (!body || !input) return;
+
+  /* ---- Blinking block cursor that tracks the caret ---- */
+  var measure = document.getElementById("term-measure");
+  var cursor = document.getElementById("term-cursor");
+  var wrap = input.parentNode;
+  var typingTimer;
+
+  function updateCursor() {
+    if (!measure || !cursor) return;
+    var pos = input.selectionStart;
+    if (pos === null || pos === undefined) pos = input.value.length;
+    measure.textContent = input.value.slice(0, pos);
+    cursor.style.left = measure.offsetWidth + "px";
+  }
+
+  // Hold the block steady while actively typing, then resume blinking.
+  function markTyping() {
+    if (wrap) wrap.classList.add("typing");
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(function () {
+      if (wrap) wrap.classList.remove("typing");
+    }, 500);
+  }
+
+  function syncCursor(typing) {
+    if (typing) markTyping();
+    // Defer so selectionStart reflects the post-key state.
+    requestAnimationFrame(updateCursor);
+  }
+
+  input.addEventListener("input", function () { syncCursor(true); });
+  input.addEventListener("keydown", function () { syncCursor(true); });
+  input.addEventListener("keyup", function () { syncCursor(false); });
+  input.addEventListener("click", function () { syncCursor(false); });
+  input.addEventListener("select", function () { syncCursor(false); });
+  input.addEventListener("focus", function () { syncCursor(false); });
+  window.addEventListener("resize", updateCursor);
 
   var LINKS = {
     github: "https://github.com/ridhachahed",
@@ -408,10 +304,13 @@
     (function step() {
       if (i <= cmd.length) {
         input.value = cmd.slice(0, i++);
+        markTyping();
+        updateCursor();
         setTimeout(step, 110);
       } else {
         echoCmd(cmd);
         input.value = "";
+        updateCursor();
         run(cmd);
         setTimeout(done, 650);
       }
