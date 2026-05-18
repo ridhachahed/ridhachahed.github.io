@@ -318,8 +318,8 @@ a:hover { color: var(--accent-warm); }
 .entry:hover { background: var(--paper); border-color: var(--line); }
 .entry-thumb {
   flex-shrink: 0;
-  width: 128px;
-  height: 128px;
+  width: 168px;
+  height: 168px;
   border-radius: var(--radius-sm);
   object-fit: cover;
   background: var(--bg-2);
