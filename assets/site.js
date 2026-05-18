@@ -224,7 +224,8 @@
     about: "/#about",
     work: "/work/",
     cv: "/cv/",
-    projects: "/projects/"
+    projects: "/projects/",
+    conferences: "/conferences/"
   };
 
   function nav(name) {
@@ -252,10 +253,11 @@
         "  <span class='k'>help</span>        this message\n" +
         "  <span class='k'>ls</span>          list pages\n" +
         "  <span class='k'>whoami</span>      who is this\n" +
-        "  <span class='k'>cd</span> &lt;page&gt;    go to a page (work, cv, projects, home)\n" +
+        "  <span class='k'>cd</span> &lt;page&gt;    go to a page (work, cv, projects, conferences, home)\n" +
         "  <span class='k'>work</span>        go to work\n" +
         "  <span class='k'>cv</span>          go to the cv / résumé\n" +
         "  <span class='k'>projects</span>    go to projects\n" +
+        "  <span class='k'>conferences</span> go to conferences\n" +
         "  <span class='k'>about</span>       about me\n" +
         "  <span class='k'>open</span> &lt;x&gt;     open cv | github | linkedin | twitter | email\n" +
         "  <span class='k'>contact</span>     how to reach me\n" +
@@ -265,7 +267,7 @@
       );
     },
     ls: function () {
-      print("home/   work/   cv/   projects/   — plus <span class='k'>open github</span>, <span class='k'>contact</span>");
+      print("home/   work/   cv/   projects/   conferences/   — plus <span class='k'>open github</span>, <span class='k'>contact</span>");
     },
     cd: function (a) {
       var t = (a[0] || "home").toLowerCase().replace(/[\/~.]/g, "");
@@ -285,6 +287,8 @@
     bio: function () { nav("about"); },
     work: function () { nav("work"); },
     projects: function () { nav("projects"); },
+    conferences: function () { nav("conferences"); },
+    talks: function () { nav("conferences"); },
     cv: function () {
       print("résumé · <a href='" + LINKS.cv + "'>download pdf ↗</a>");
       nav("cv");

@@ -1,0 +1,8 @@
+---
+layout: post
+title:  "A Generalizing Swarm of Solvers for ARC-AGI"
+date:   2026-03-01
+image: /arcagi.png
+categories: Side project
+---
+Built an agent that uses a swarm of solvers to tackle ARC-AGI problems, with a design backed by a small bank of reusable Domain-Specific Language (DSL) primitives.

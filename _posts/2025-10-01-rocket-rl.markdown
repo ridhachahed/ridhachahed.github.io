@@ -1,0 +1,8 @@
+---
+layout: post
+title:  "Reinforcement Learning for Rocket Trajectory Optimization"
+date:   2025-10-01
+image: /gym_lander.png
+categories: Side project
+---
+Studied the REINFORCE policy-gradient algorithm on the Lunar Lander environment to better understand policy-gradient methods for continuous control. Implemented REINFORCE with continuous actions in PyTorch and tuned its hyperparameters to see which ones matter most for performance.
